@@ -5,3 +5,4 @@ python-dotenv
 schedule
 tabulate
 webdriver-manager
+gunicorn==21.2.0
