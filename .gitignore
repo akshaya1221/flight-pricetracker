@@ -1,0 +1,40 @@
+# Environment variables (IMPORTANT - contains your passwords!)
+.env
+
+# Virtual environment
+venv/
+env/
+ENV/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+flight_prices.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Chrome driver
+chromedriver.exe
+chromedriver
+
+# Temporary files
+*.tmp
+*.bak

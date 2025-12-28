@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Price History</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+        .header h1 { color: #667eea; font-size: 2em; }
+        .history-container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .btn {
+            padding: 12px 24px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            display: inline-block;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        th { background: #f9fafb; font-weight: 600; }
+        tr:hover { background: #f9fafb; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📈 Price History</h1>
+            {% if flight %}
+                <p style="margin-top: 10px; font-size: 1.2em;">
+                    <strong>{{ flight[1] }} ✈️ {{ flight[2] }}</strong> on {{ flight[3] }}
+                </p>
+            {% endif %}
+        </div>
+        
+        <div class="history-container">
+            <a href="{{ url_for('index') }}" class="btn">← Back to Home</a>
+            
+            {% if history %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Price</th>
+                            <th>Checked At</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for price, checked_at in history %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td><strong>₹{{ price }}</strong></td>
+                            <td>{{ checked_at }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div style="text-align: center; padding: 60px;">
+                    <h3>No price history available</h3>
+                    <p>Check the price to start tracking!</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

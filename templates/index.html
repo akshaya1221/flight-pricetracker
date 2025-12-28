@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Price Tracker</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .header h1 { color: #667eea; font-size: 2.5em; margin-bottom: 10px; }
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        .alert {
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .alert-success { background: #d1fae5; color: #065f46; }
+        .alert-error { background: #fee2e2; color: #991b1b; }
+        .flights-container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .flights-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .flight-card {
+            background: #f9fafb;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .flight-route {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        .btn-check {
+            background: #10b981;
+            padding: 10px 20px;
+            font-size: 0.9em;
+            margin-right: 10px;
+        }
+        .btn-history {
+            background: #f59e0b;
+            padding: 10px 20px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✈️ Flight Price Tracker</h1>
+            <p>Monitor flight prices and get instant alerts!</p>
+        </div>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <div class="flights-container">
+            <div class="flights-header">
+                <h2>📋 Your Tracked Flights ({{ flights|length }})</h2>
+                <a href="{{ url_for('add_flight') }}" class="btn">➕ Add New Flight</a>
+            </div>
+            
+            {% if flights %}
+                {% for flight in flights %}
+                <div class="flight-card">
+                    <div class="flight-route">
+                        {{ flight[1] }} ✈️ {{ flight[2] }}
+                    </div>
+                    <p>📅 Date: {{ flight[3] }} | 📧 Email: {{ flight[4] }}</p>
+                    {% if flight[5] %}
+                        <p>🎯 Target Price: ₹{{ flight[5] }}</p>
+                    {% endif %}
+                    <div style="margin-top: 15px;">
+                        <a href="{{ url_for('check_flight', flight_id=flight[0]) }}" class="btn btn-check">
+                            🔍 Check Price
+                        </a>
+                        <a href="{{ url_for('price_history', flight_id=flight[0]) }}" class="btn btn-history">
+                            📈 History
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div style="text-align: center; padding: 60px;">
+                    <h3>No flights tracked yet</h3>
+                    <p>Start by adding your first flight!</p>
+                    <br>
+                    <a href="{{ url_for('add_flight') }}" class="btn">➕ Add Your First Flight</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

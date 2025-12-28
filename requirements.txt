@@ -1,0 +1,7 @@
+requests
+selenium
+pandas
+python-dotenv
+schedule
+tabulate
+webdriver-manager
