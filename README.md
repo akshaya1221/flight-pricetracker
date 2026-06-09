@@ -125,7 +125,7 @@ flight-price-tracker/
 └── README.md            # This file
 ```
 
-## 💡 How It Works
+## 💡 How It Works:
 
 1. **Add Flights**: Specify origin, destination, dates, and email
 2. **Price Monitoring**: System checks prices via Amadeus API
