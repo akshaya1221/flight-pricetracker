@@ -190,19 +190,6 @@ pip install python-dotenv
 pip install webdriver-manager
 ```
 
-## 🚀 Future Enhancements
-
-- [ ] SMS alerts via Twilio
-- [ ] Web dashboard with Flask
-- [ ] Mobile app notifications
-- [ ] ML-based price prediction
-- [ ] Multi-airline comparison
-- [ ] Telegram bot integration
-- [ ] Price drop percentage customization
-
-## 📝 License
-
-MIT License - Feel free to use and modify!
 
 ## 🤝 Contributing
 
@@ -214,4 +201,3 @@ For issues or questions, please create an issue on GitHub or contact via email.
 
 ---
 
-**Happy Travel! ✈️ Save Money! 💰**
